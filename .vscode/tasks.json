@@ -1,0 +1,33 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "Build Raylib",
+            "command": "C:/raylib/w64devkit/bin/g++.exe",
+            "args": [
+                "-Wall",
+                "-Wextra",
+                "-g3",
+                "-I",
+                "C:/raylib/raylib/src",
+                "${file}",
+                "-o",
+                "${fileDirname}/output/${fileBasenameNoExtension}.exe",
+                "-L",
+                "C:/raylib/raylib/src",
+                "-lraylib",
+                "-lgdi32",
+                "-lwinmm"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": ["$gcc"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
