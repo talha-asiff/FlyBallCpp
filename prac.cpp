@@ -60,8 +60,18 @@ int main()
         }
         } else {
             ClearBackground(RED);
-            DrawText("GAME OVER", 250, 250, 70, WHITE);
-            
+            DrawText("GAME OVER", 190, 230, 25, YELLOW);
+            DrawText("PRESS R TO RESTART", 140, 270, 20, WHITE);
+            if(IsKeyDown(KEY_R)){
+                lost = false;
+                counterSeed = 0;
+                x = 250, y = 250;
+                oX = 500, oY = 340;
+                obsGen = 0;
+                generating = false;
+                moving = false;
+                lost = false;
+            }
         }
         EndDrawing();
     }
