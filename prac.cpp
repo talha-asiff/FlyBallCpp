@@ -14,10 +14,20 @@ int main()
     int obsGen = 0;
     bool generating = false;
     bool moving = false;
+    bool lost = false;
     while(WindowShouldClose() == false){
         BeginDrawing();
+        if(!lost){
         ClearBackground(BLUE);
-        DrawRectangle(0, 460, 500, 50, GRAY);
+        // if((x <= oX) && (x >= oX+39) && (y >= oY) && (y <= oY+200)){
+        //     lost = true;
+        // }
+        Rectangle obsRect = { (float)oX, (float)oY, 40, 200 };
+        Vector2 playerPos = { (float)x, (float)y };
+
+        if (CheckCollisionCircleRec(playerPos, 15.0f, obsRect)) {
+            lost = true;
+        }
         if(!moving && generating && (counterSeed == obsGen)){
             moving = true;
         }
@@ -29,6 +39,7 @@ int main()
                 moving = false;
             }
         }
+        DrawRectangle(0, 460, 500, 50, GRAY);
         DrawCircle(x,y, 15, RED);
         if(IsKeyDown(KEY_W) && !(y<0)){y-=10; grabbed = true;}
         if(IsKeyDown(KEY_S) && !(y>500)){y+=10; grabbed = true;}
@@ -46,6 +57,11 @@ int main()
             counterSeed = 0;
             obsGen = rand() % 10;
             generating = true;
+        }
+        } else {
+            ClearBackground(RED);
+            DrawText("GAME OVER", 250, 250, 70, WHITE);
+            
         }
         EndDrawing();
     }
