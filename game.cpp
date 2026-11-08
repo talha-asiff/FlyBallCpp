@@ -6,7 +6,7 @@ using namespace std;
 int main()
 {
     bool grabbed = false;
-    InitWindow(500, 500, "Prac window");
+    InitWindow(500, 500, "Game window");
     SetTargetFPS(60);
     int counterSeed = 0;
     int x = 250, y = 250;
