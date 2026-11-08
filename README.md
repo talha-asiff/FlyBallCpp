@@ -2,7 +2,6 @@
 
 ![C++](https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)
 ![Raylib](https://img.shields.io/badge/raylib-000000?style=for-the-badge&logo=raylib&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)
 
 A 2D arcade-style survival game built with **C++** and the **raylib** graphics library. Control a red ball, fight constant gravity, avoid moving obstacles, and survive as long as you can!
 
@@ -79,7 +78,3 @@ Run the compiled executable:
 - **Collision:** Evaluated using `CheckCollisionCircleRec(playerPos, radius, obstacleRect)`.
 
 ---
-
-## 📄 License
-
-This project is open-source and available under the [MIT License](LICENSE).
