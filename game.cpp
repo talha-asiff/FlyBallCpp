@@ -15,6 +15,16 @@ int main()
     bool generating = false;
     bool moving = false;
     bool lost = false;
+    Image plane = LoadImage("assets/plane.png");
+    Image road = LoadImage("assets/road.png");
+    Image building = LoadImage("assets/building.png");
+    Texture2D texturePlane = LoadTextureFromImage(plane);    // Uploaded to GPU VRAM
+    Texture2D textureRoad = LoadTextureFromImage(road);
+    Texture2D textureBuilding = LoadTextureFromImage(building);
+    UnloadImage(plane);
+    UnloadImage(building);
+    UnloadImage(road);
+    
     while(WindowShouldClose() == false){
         BeginDrawing();
         if(!lost){
@@ -32,15 +42,23 @@ int main()
             moving = true;
         }
         if(moving){
-            DrawRectangle(oX, oY, 40, 200, BLACK);
+            //DrawRectangle(oX, oY, 40, 200, BLACK);
+            // Replaced obstacle rectangle with building texture using DrawTexturePro for custom sizing
+            Rectangle sourceObs = { 0.0f, 0.0f, (float)textureBuilding.width, (float)textureBuilding.height };
+            Rectangle destObs = { (float)oX, (float)oY, 40.0f, 200.0f };
+            DrawTexturePro(textureBuilding, sourceObs, destObs, (Vector2){0, 0}, 0.0f, WHITE);
             oX -= 10;
             if(oX <= 0){
                 oX = 500;
                 moving = false;
             }
         }
-        DrawRectangle(0, 460, 500, 50, GRAY);
-        DrawCircle(x,y, 15, RED);
+        //DrawRectangle(0, 460, 500, 50, GRAY);
+        Rectangle sourceRoad = { 0.0f, 0.0f, (float)textureRoad.width, (float)textureRoad.height };
+        Rectangle destRoad = { 0.0f, 460.0f, 500.0f, 40.0f };
+        DrawTexturePro(textureRoad, sourceRoad, destRoad, (Vector2){0, 0}, 0.0f, WHITE);
+        //DrawCircle(x,y, 15, RED);
+        DrawTextureEx(texturePlane, (Vector2){(float)(x - 20), (float)(y - 20)}, 0.0f, 0.15f, WHITE);
         if(IsKeyDown(KEY_W) && !(y<0)){y-=10; grabbed = true;}
         if(IsKeyDown(KEY_S) && !(y>500)){y+=10; grabbed = true;}
         if(IsKeyDown(KEY_A) && !(x<0)){x-=10; grabbed = true;}
@@ -75,6 +93,9 @@ int main()
         }
         EndDrawing();
     }
+    UnloadTexture(texturePlane);
+    UnloadTexture(textureRoad);
+    UnloadTexture(textureBuilding);
     CloseWindow();
     return 0;
 }
